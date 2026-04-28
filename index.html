@@ -7,154 +7,195 @@
 <title>Sattva — Ayurvedic Gut Reset for Your Parents</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: #1a1a1a; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFBF5; color: #1a1a1a; }
   .page { max-width: 620px; margin: 0 auto; padding: 0 20px 60px; }
-
-  /* HERO */
+  .topbar { text-align: center; background: #E8820C; color: #fff; font-size: 13px; font-weight: 500; padding: 10px 16px; letter-spacing: 0.02em; }
   .hero { text-align: center; padding: 48px 0 36px; }
-  .badge { display: inline-block; background: #EAF3DE; color: #3B6D11; font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; letter-spacing: 0.03em; }
-  .hero h1 { font-size: 30px; font-weight: 700; line-height: 1.3; margin-bottom: 16px; color: #111; }
-  .hero h1 span { color: #1D9E75; }
-  .hero p { font-size: 16px; color: #555; line-height: 1.7; margin-bottom: 28px; }
-  .cta-btn { display: block; background: #1D9E75; color: #fff; font-size: 17px; font-weight: 600; padding: 16px 32px; border-radius: 12px; border: none; cursor: pointer; width: 100%; max-width: 380px; margin: 0 auto 10px; text-align: center; text-decoration: none; }
-  .cta-sub { font-size: 12px; color: #888; text-align: center; }
-
-  /* DIVIDER */
-  hr { border: none; border-top: 1px solid #f0f0f0; margin: 32px 0; }
-
-  /* PROBLEM */
-  .problem { background: #f9f9f7; border-radius: 14px; padding: 24px; margin-bottom: 8px; }
-  .problem h2 { font-size: 20px; font-weight: 600; color: #111; margin-bottom: 12px; line-height: 1.4; }
-  .problem p { font-size: 15px; color: #555; line-height: 1.7; }
-
-  /* SECTION LABEL */
-  .section-label { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
-
-  /* STEPS */
+  .badge { display: inline-block; background: #FEF3E2; color: #B85C00; font-size: 12px; font-weight: 600; padding: 5px 16px; border-radius: 20px; margin-bottom: 20px; letter-spacing: 0.04em; border: 1px solid #F5C07A; }
+  .hero h1 { font-size: 32px; font-weight: 800; line-height: 1.25; margin-bottom: 18px; color: #1a1a1a; }
+  .hero h1 span { color: #E8820C; }
+  .hero .subhead { font-size: 17px; color: #555; line-height: 1.75; margin-bottom: 12px; }
+  .hero .subhead strong { color: #1a1a1a; }
+  .hero .emotional { font-size: 15px; color: #888; font-style: italic; margin-bottom: 28px; line-height: 1.6; }
+  .cta-btn { display: block; background: #E8820C; color: #fff; font-size: 17px; font-weight: 700; padding: 17px 32px; border-radius: 12px; border: none; cursor: pointer; width: 100%; max-width: 400px; margin: 0 auto 10px; text-align: center; text-decoration: none; }
+  .cta-sub { font-size: 12px; color: #aaa; text-align: center; }
+  hr { border: none; border-top: 1px solid #F0E8DC; margin: 32px 0; }
+  .hook { background: #FEF3E2; border-radius: 16px; padding: 28px; margin-bottom: 8px; border: 1px solid #F5C07A; }
+  .hook h2 { font-size: 21px; font-weight: 700; color: #1a1a1a; margin-bottom: 14px; line-height: 1.4; }
+  .hook p { font-size: 15px; color: #5a4a3a; line-height: 1.75; margin-bottom: 10px; }
+  .hook p:last-child { margin-bottom: 0; }
+  .section-label { font-size: 11px; color: #B85C00; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; margin-bottom: 16px; }
   .steps { display: flex; flex-direction: column; gap: 12px; margin-bottom: 8px; }
-  .step { display: flex; align-items: flex-start; gap: 14px; background: #fff; border: 1px solid #eee; border-radius: 14px; padding: 16px 20px; }
-  .step-num { width: 30px; height: 30px; min-width: 30px; border-radius: 50%; background: #EAF3DE; color: #3B6D11; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
-  .step h3 { font-size: 15px; font-weight: 600; color: #111; margin-bottom: 4px; }
-  .step p { font-size: 13px; color: #666; line-height: 1.5; }
-
-  /* WHATSAPP STRIP */
-  .wa-strip { background: #E1F5EE; border-radius: 10px; padding: 14px 18px; text-align: center; margin-bottom: 8px; }
-  .wa-strip p { font-size: 14px; color: #085041; font-weight: 500; }
-
-  /* PROOF CARDS */
+  .step { display: flex; align-items: flex-start; gap: 16px; background: #fff; border: 1px solid #F0E8DC; border-radius: 14px; padding: 18px 20px; }
+  .step-num { width: 32px; height: 32px; min-width: 32px; border-radius: 50%; background: #E8820C; color: #fff; font-size: 15px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .step h3 { font-size: 15px; font-weight: 700; color: #1a1a1a; margin-bottom: 5px; }
+  .step p { font-size: 13px; color: #666; line-height: 1.6; }
+  .protocol { background: #fff; border: 1px solid #F0E8DC; border-radius: 16px; padding: 24px; margin-bottom: 8px; }
+  .protocol h3 { font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 16px; }
+  .spice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .spice-item { background: #FFFBF5; border: 1px solid #F0E8DC; border-radius: 10px; padding: 12px 14px; }
+  .spice-item .name { font-size: 14px; font-weight: 700; color: #E8820C; margin-bottom: 3px; }
+  .spice-item .use { font-size: 12px; color: #777; line-height: 1.4; }
+  .wa-strip { background: #E6F4EA; border-radius: 12px; padding: 16px 20px; text-align: center; margin-bottom: 8px; border: 1px solid #B8DDBF; }
+  .wa-strip p { font-size: 14px; color: #1E6B33; font-weight: 600; }
+  .wa-strip .sub { font-size: 12px; color: #4A9A5E; font-weight: 400; margin-top: 4px; }
   .proof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 8px; }
-  .proof-card { background: #f9f9f7; border-radius: 12px; padding: 16px; text-align: center; }
-  .proof-card .num { font-size: 26px; font-weight: 700; color: #1D9E75; }
-  .proof-card .label { font-size: 12px; color: #777; margin-top: 4px; line-height: 1.4; }
-
-  /* TESTIMONIAL */
-  .testimonial { background: #f9f9f7; border-radius: 14px; padding: 20px 24px; border-left: 4px solid #1D9E75; margin-bottom: 8px; }
-  .testimonial p { font-size: 15px; color: #333; line-height: 1.7; font-style: italic; }
-  .testimonial .attr { font-size: 13px; color: #888; margin-top: 10px; }
-
-  /* PRICING */
-  .pricing { background: #fff; border: 2px solid #1D9E75; border-radius: 16px; padding: 28px 24px; text-align: center; margin-bottom: 8px; }
-  .pricing .tag { background: #EAF3DE; color: #3B6D11; font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; display: inline-block; margin-bottom: 16px; }
-  .pricing .price { font-size: 48px; font-weight: 700; color: #111; }
+  .proof-card { background: #fff; border: 1px solid #F0E8DC; border-radius: 12px; padding: 18px 10px; text-align: center; }
+  .proof-card .num { font-size: 28px; font-weight: 800; color: #E8820C; }
+  .proof-card .label { font-size: 11px; color: #888; margin-top: 5px; line-height: 1.4; }
+  .testimonial { background: #fff; border-radius: 14px; padding: 22px 24px; border-left: 4px solid #E8820C; margin-bottom: 8px; border-top: 1px solid #F0E8DC; border-right: 1px solid #F0E8DC; border-bottom: 1px solid #F0E8DC; }
+  .testimonial p { font-size: 16px; color: #333; line-height: 1.75; font-style: italic; }
+  .testimonial .attr { font-size: 13px; color: #aaa; margin-top: 10px; }
+  .forwho { background: #fff; border: 1px solid #F0E8DC; border-radius: 16px; padding: 24px; margin-bottom: 8px; }
+  .forwho h3 { font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 14px; }
+  .forwho ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .forwho ul li { font-size: 14px; color: #444; line-height: 1.5; padding-left: 24px; position: relative; }
+  .forwho ul li::before { content: "✓"; position: absolute; left: 0; color: #E8820C; font-weight: 700; }
+  .pricing { background: #fff; border: 2px solid #E8820C; border-radius: 18px; padding: 32px 24px; text-align: center; margin-bottom: 8px; }
+  .pricing .tag { background: #E8820C; color: #fff; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: 20px; display: inline-block; margin-bottom: 18px; letter-spacing: 0.04em; }
+  .pricing .price { font-size: 52px; font-weight: 800; color: #1a1a1a; line-height: 1; }
   .pricing .price span { font-size: 18px; color: #888; font-weight: 400; }
-  .pricing .desc { font-size: 14px; color: #666; margin: 10px 0 20px; line-height: 1.6; }
-
-  /* FORM */
-  .form-wrap { display: flex; flex-direction: column; gap: 10px; max-width: 400px; margin: 0 auto; }
-  .form-wrap input { width: 100%; padding: 12px 16px; border-radius: 10px; border: 1px solid #ddd; font-size: 15px; background: #fafafa; color: #111; outline: none; }
-  .form-wrap input:focus { border-color: #1D9E75; }
-
-  /* FAQ */
+  .pricing .desc { font-size: 14px; color: #666; margin: 12px 0 8px; line-height: 1.7; }
+  .pricing .fine { font-size: 12px; color: #aaa; margin-bottom: 24px; }
+  .form-wrap { display: flex; flex-direction: column; gap: 10px; max-width: 420px; margin: 0 auto; }
+  .form-wrap input { width: 100%; padding: 13px 16px; border-radius: 10px; border: 1px solid #E0D5C8; font-size: 15px; background: #FFFBF5; color: #1a1a1a; outline: none; }
+  .form-wrap input:focus { border-color: #E8820C; }
   .faq { display: flex; flex-direction: column; gap: 10px; }
-  .faq-item { background: #f9f9f7; border-radius: 12px; padding: 16px 20px; }
-  .faq-item h4 { font-size: 14px; font-weight: 600; color: #111; margin-bottom: 6px; }
-  .faq-item p { font-size: 13px; color: #666; line-height: 1.6; }
-
-  /* FOOTER */
+  .faq-item { background: #fff; border: 1px solid #F0E8DC; border-radius: 12px; padding: 18px 20px; }
+  .faq-item h4 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 7px; }
+  .faq-item p { font-size: 13px; color: #666; line-height: 1.65; }
   .footer { text-align: center; padding-top: 32px; }
-  .footer p { font-size: 12px; color: #aaa; line-height: 1.8; }
-
+  .footer .logo { font-size: 24px; font-weight: 800; color: #E8820C; margin-bottom: 8px; }
+  .footer p { font-size: 12px; color: #bbb; line-height: 1.9; }
+  .footer strong { color: #888; }
   @media (max-width: 480px) {
-    .hero h1 { font-size: 24px; }
-    .proof { grid-template-columns: repeat(3, 1fr); }
-    .proof-card .num { font-size: 20px; }
+    .hero h1 { font-size: 26px; }
+    .proof-card .num { font-size: 22px; }
   }
 </style>
 </head>
 <body>
+
+<div class="topbar">🌿 Beta now open — Only 100 spots available</div>
+
 <div class="page">
 
-  <!-- HERO -->
   <div class="hero">
-    <div class="badge">Ayurvedic gut reset — for Indian parents</div>
-    <h1>Stop your parents' daily acidity.<br><span>The food science they already believe in.</span></h1>
-    <p>You can't be there every day. But Sattva can. We combine your parent's daily medications, their home state, and their diet — and give them a personalised 5-day spice protocol to fix chronic acidity and bloating. No weird diets. Just their own kitchen.</p>
-    <a href="#signup" class="cta-btn">Join the ₹1 trial — reserve your spot</a>
-    <p class="cta-sub">5-day personalised gut reset · Cancel anytime · No spam</p>
+    <div class="badge">🪔 Ayurveda · Personalised · For Indian Parents</div>
+    <h1>When did Appa last finish a meal<br>without reaching for <span>Digene after?</span></h1>
+    <p class="subhead">Sattva gives your parents a <strong>5-day personalised spice protocol</strong> based on their body type, their medications, and the food they already eat.</p>
+    <p class="emotional">She raised you on haldi doodh. Now it's your turn.</p>
+    <a href="#signup" class="cta-btn">Start your parent's gut reset — ₹1</a>
+    <p class="cta-sub">5-day trial · Delivered on WhatsApp · Cancel anytime</p>
   </div>
 
   <hr />
 
-  <!-- PROBLEM -->
-  <div class="problem">
+  <div class="hook">
     <h2>"I keep telling Amma to eat right. She won't listen to me — but she'll listen to Ayurveda."</h2>
-    <p>If you've watched your parents suffer through antacids every night, skip meals because of bloating, or ignore every modern diet tip you share — Sattva was built for your family.</p>
+    <p>You've sent articles. You've forwarded videos. You've argued at the dinner table. Nothing sticks — because to them, your advice sounds like a lecture from a child who doesn't understand their body.</p>
+    <p>But when the same advice comes wrapped in the language of their grandmothers? They listen. Sattva speaks that language.</p>
   </div>
 
   <hr />
 
-  <!-- HOW IT WORKS -->
   <p class="section-label">How it works</p>
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div>
-        <h3>You fill in your parent's details</h3>
-        <p>Their daily medications (BP, thyroid, diabetes), home state, and what they eat. Takes 3 minutes.</p>
+        <h3>You fill in 3 minutes of details</h3>
+        <p>Their daily medications (Metformin, Thyronorm, BP pills), home state, and what they typically eat. You do this — your parent doesn't need to touch a screen.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div>
-        <h3>We diagnose their Prakriti</h3>
-        <p>Vata, Pitta, or Kapha — personalised to their body, their medications, and their region's food culture.</p>
+        <h3>We identify their Prakriti imbalance</h3>
+        <p>Vata, Pitta, or Kapha — cross-referenced with their medications and their region's traditional food culture. A 57-year-old Tamil Brahmin has a very different gut than a 60-year-old Punjabi.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
       <div>
-        <h3>They get a 5-day spice protocol on WhatsApp</h3>
-        <p>Simple. Using spices already in their kitchen — jeera, ajwain, saunf, haldi. No app download needed.</p>
+        <h3>Their 5-day protocol arrives on WhatsApp</h3>
+        <p>No app to download. No complicated charts. Just a simple daily message — what to add to their chai, what to avoid before dinner, which spice to mix in warm water each morning.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
       <div>
-        <h3>You see the difference in 5 days</h3>
-        <p>Less bloating. Better sleep. A parent who feels heard — not lectured.</p>
+        <h3>You notice the difference by day 3</h3>
+        <p>Less bloating after meals. Fewer antacids. A parent who finally feels like someone understood their body — not just their diagnosis.</p>
       </div>
     </div>
   </div>
 
   <hr />
 
-  <!-- WHATSAPP -->
-  <div class="wa-strip">
-    <p>Daily check-ins delivered to your parent's WhatsApp — no app download needed on their side.</p>
+  <p class="section-label">What's in the protocol</p>
+  <div class="protocol">
+    <h3>Spices already in your parent's kitchen — used the right way.</h3>
+    <div class="spice-grid">
+      <div class="spice-item">
+        <div class="name">Ajwain (Carom)</div>
+        <div class="use">Relieves gas and bloating after heavy meals</div>
+      </div>
+      <div class="spice-item">
+        <div class="name">Saunf (Fennel)</div>
+        <div class="use">Cools Pitta, reduces acidity after lunch</div>
+      </div>
+      <div class="spice-item">
+        <div class="name">Jeera (Cumin)</div>
+        <div class="use">Stimulates digestion, reduces morning heaviness</div>
+      </div>
+      <div class="spice-item">
+        <div class="name">Haldi (Turmeric)</div>
+        <div class="use">Anti-inflammatory, supports gut lining repair</div>
+      </div>
+      <div class="spice-item">
+        <div class="name">Saunth (Dry Ginger)</div>
+        <div class="use">Warms Vata, eases chronic constipation</div>
+      </div>
+      <div class="spice-item">
+        <div class="name">Dhania (Coriander)</div>
+        <div class="use">Balances all three doshas, aids absorption</div>
+      </div>
+    </div>
   </div>
 
   <hr />
 
-  <!-- PROOF -->
-  <p class="section-label">Early numbers</p>
+  <div class="wa-strip">
+    <p>📱 Everything on WhatsApp. Nothing to install.</p>
+    <p class="sub">Your parent gets a simple message every morning. That's it.</p>
+  </div>
+
+  <hr />
+
+  <p class="section-label">This is for you if</p>
+  <div class="forwho">
+    <h3>You recognise any of these:</h3>
+    <ul>
+      <li>Your parent reaches for antacids or Digene after almost every meal</li>
+      <li>They've been told to "eat healthy" but nobody told them what that means for their body</li>
+      <li>They're on BP, thyroid, or diabetes medication and their digestion has gotten worse</li>
+      <li>They trust Ayurveda but don't know where to start</li>
+      <li>You live in a different city and feel helpless about their health</li>
+    </ul>
+  </div>
+
+  <hr />
+
+  <p class="section-label">Early signal</p>
   <div class="proof">
     <div class="proof-card">
       <div class="num">50+</div>
-      <div class="label">Parents on the waitlist</div>
+      <div class="label">Parents already on the waitlist</div>
     </div>
     <div class="proof-card">
-      <div class="num">5 days</div>
-      <div class="label">To feel a real difference</div>
+      <div class="num">3 days</div>
+      <div class="label">When most people notice a change</div>
     </div>
     <div class="proof-card">
       <div class="num">₹1</div>
@@ -164,58 +205,66 @@
 
   <hr />
 
-  <!-- TESTIMONIAL -->
   <p class="section-label">What people are saying</p>
   <div class="testimonial">
-    <p>"I've been buying antacids for my father for 3 years. This is the first thing that actually made sense to him — because it speaks his language."</p>
+    <p>"I've been buying antacids for my father for 3 years. This is the first thing that actually made sense to him — because it speaks his language, not mine."</p>
     <div class="attr">— Priya, 27, Bangalore (waitlist member)</div>
+  </div>
+  <br>
+  <div class="testimonial">
+    <p>"My mother has been on Thyronorm for 6 years and nobody ever told her that certain foods were making it worse. Sattva connected those dots."</p>
+    <div class="attr">— Arjun, 31, Mumbai (waitlist member)</div>
   </div>
 
   <hr />
 
-  <!-- PRICING + FORM -->
   <div class="pricing" id="signup">
-    <div class="tag">Limited beta spots</div>
+    <div class="tag">🪔 LIMITED BETA — 100 SPOTS</div>
     <div class="price">₹1 <span>for 5 days</span></div>
-    <p class="desc">Then ₹499/month for the daily dashboard and WhatsApp check-ins.<br>Cancel before day 6 and pay nothing more. No questions asked.</p>
+    <p class="desc">Get your parent's full personalised Prakriti diagnosis + 5-day WhatsApp spice protocol.</p>
+    <p class="fine">Then ₹499/month for daily check-ins and the ongoing dashboard. Cancel before day 6 — pay nothing more. No questions asked.</p>
     <div class="form-wrap">
       <input type="text" placeholder="Your name" />
-      <input type="tel" placeholder="Your WhatsApp number" />
-      <input type="text" placeholder="Parent's home state (e.g. Tamil Nadu)" />
+      <input type="tel" placeholder="Your WhatsApp number (+91)" />
+      <input type="text" placeholder="Your parent's home state (e.g. Tamil Nadu)" />
+      <input type="text" placeholder="Their main issue (e.g. acidity, bloating)" />
       <a href="#" class="cta-btn">Reserve my parent's spot →</a>
     </div>
   </div>
 
   <hr />
 
-  <!-- FAQ -->
-  <p class="section-label">Common questions</p>
+  <p class="section-label">Your questions answered</p>
   <div class="faq">
     <div class="faq-item">
       <h4>Does my parent need to download anything?</h4>
-      <p>No. Everything is delivered on WhatsApp. They just need to read and follow — that's it.</p>
+      <p>No. Everything arrives on WhatsApp. They just need to read a short message every morning. That's the entire interaction required from them.</p>
+    </div>
+    <div class="faq-item">
+      <h4>My parent is on multiple medications. Is this safe?</h4>
+      <p>Yes. You enter their medications during setup and we cross-reference them with the protocol. We only suggest dietary additions that don't conflict with common medications. We always recommend consulting their doctor for any major changes.</p>
     </div>
     <div class="faq-item">
       <h4>What if their doctor has already given a diet plan?</h4>
-      <p>Sattva works alongside modern medicine, not against it. We cross-reference their medications so there are no conflicts.</p>
+      <p>Sattva works alongside modern medicine, not against it. We don't replace medical advice — we add the layer of traditional food science that most doctors don't have time to explain.</p>
     </div>
     <div class="faq-item">
-      <h4>Is this safe for someone on BP or thyroid medication?</h4>
-      <p>Yes. You enter their medications during setup and our protocol is adjusted accordingly. We recommend consulting their doctor for any major changes.</p>
+      <h4>What happens after the 5 days?</h4>
+      <p>If your parent notices a difference, the subscription continues at ₹499/month — daily tips, weekly check-ins on WhatsApp, and an ongoing dashboard for you to track their progress. Cancel anytime before day 6 and you pay nothing more.</p>
     </div>
     <div class="faq-item">
-      <h4>What happens after 5 days?</h4>
-      <p>If your parent feels better, the subscription continues at ₹499/month with daily tips and weekly check-ins. Cancel anytime before day 6 and you pay nothing more.</p>
+      <h4>My parents are from a specific region — does that matter?</h4>
+      <p>Absolutely. A Keralite with Pitta imbalance gets a very different protocol than a Rajasthani with Vata imbalance. Regional food culture is built into how we personalise the plan.</p>
     </div>
   </div>
 
   <hr />
 
-  <!-- FOOTER -->
   <div class="footer">
-    <p>Sattva is built with love for Indian families.<br>
+    <div class="logo">sattva</div>
+    <p>Built with love for Indian families.<br>
     Questions? WhatsApp us: <strong>+91 XXXXX XXXXX</strong><br><br>
-    <em>This is a wellness program, not a medical service. Always consult your doctor for medical advice.</em></p>
+    <em>Sattva is a wellness program, not a medical service.<br>Always consult your doctor before making changes to your health routine.</em></p>
   </div>
 
 </div>
