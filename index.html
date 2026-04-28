@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sattva — Ayurvedic Gut Reset for Your Parents</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: #1a1a1a; }
+  .page { max-width: 620px; margin: 0 auto; padding: 0 20px 60px; }
+
+  /* HERO */
+  .hero { text-align: center; padding: 48px 0 36px; }
+  .badge { display: inline-block; background: #EAF3DE; color: #3B6D11; font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; letter-spacing: 0.03em; }
+  .hero h1 { font-size: 30px; font-weight: 700; line-height: 1.3; margin-bottom: 16px; color: #111; }
+  .hero h1 span { color: #1D9E75; }
+  .hero p { font-size: 16px; color: #555; line-height: 1.7; margin-bottom: 28px; }
+  .cta-btn { display: block; background: #1D9E75; color: #fff; font-size: 17px; font-weight: 600; padding: 16px 32px; border-radius: 12px; border: none; cursor: pointer; width: 100%; max-width: 380px; margin: 0 auto 10px; text-align: center; text-decoration: none; }
+  .cta-sub { font-size: 12px; color: #888; text-align: center; }
+
+  /* DIVIDER */
+  hr { border: none; border-top: 1px solid #f0f0f0; margin: 32px 0; }
+
+  /* PROBLEM */
+  .problem { background: #f9f9f7; border-radius: 14px; padding: 24px; margin-bottom: 8px; }
+  .problem h2 { font-size: 20px; font-weight: 600; color: #111; margin-bottom: 12px; line-height: 1.4; }
+  .problem p { font-size: 15px; color: #555; line-height: 1.7; }
+
+  /* SECTION LABEL */
+  .section-label { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 12px; margin-bottom: 8px; }
+  .step { display: flex; align-items: flex-start; gap: 14px; background: #fff; border: 1px solid #eee; border-radius: 14px; padding: 16px 20px; }
+  .step-num { width: 30px; height: 30px; min-width: 30px; border-radius: 50%; background: #EAF3DE; color: #3B6D11; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+  .step h3 { font-size: 15px; font-weight: 600; color: #111; margin-bottom: 4px; }
+  .step p { font-size: 13px; color: #666; line-height: 1.5; }
+
+  /* WHATSAPP STRIP */
+  .wa-strip { background: #E1F5EE; border-radius: 10px; padding: 14px 18px; text-align: center; margin-bottom: 8px; }
+  .wa-strip p { font-size: 14px; color: #085041; font-weight: 500; }
+
+  /* PROOF CARDS */
+  .proof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 8px; }
+  .proof-card { background: #f9f9f7; border-radius: 12px; padding: 16px; text-align: center; }
+  .proof-card .num { font-size: 26px; font-weight: 700; color: #1D9E75; }
+  .proof-card .label { font-size: 12px; color: #777; margin-top: 4px; line-height: 1.4; }
+
+  /* TESTIMONIAL */
+  .testimonial { background: #f9f9f7; border-radius: 14px; padding: 20px 24px; border-left: 4px solid #1D9E75; margin-bottom: 8px; }
+  .testimonial p { font-size: 15px; color: #333; line-height: 1.7; font-style: italic; }
+  .testimonial .attr { font-size: 13px; color: #888; margin-top: 10px; }
+
+  /* PRICING */
+  .pricing { background: #fff; border: 2px solid #1D9E75; border-radius: 16px; padding: 28px 24px; text-align: center; margin-bottom: 8px; }
+  .pricing .tag { background: #EAF3DE; color: #3B6D11; font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; display: inline-block; margin-bottom: 16px; }
+  .pricing .price { font-size: 48px; font-weight: 700; color: #111; }
+  .pricing .price span { font-size: 18px; color: #888; font-weight: 400; }
+  .pricing .desc { font-size: 14px; color: #666; margin: 10px 0 20px; line-height: 1.6; }
+
+  /* FORM */
+  .form-wrap { display: flex; flex-direction: column; gap: 10px; max-width: 400px; margin: 0 auto; }
+  .form-wrap input { width: 100%; padding: 12px 16px; border-radius: 10px; border: 1px solid #ddd; font-size: 15px; background: #fafafa; color: #111; outline: none; }
+  .form-wrap input:focus { border-color: #1D9E75; }
+
+  /* FAQ */
+  .faq { display: flex; flex-direction: column; gap: 10px; }
+  .faq-item { background: #f9f9f7; border-radius: 12px; padding: 16px 20px; }
+  .faq-item h4 { font-size: 14px; font-weight: 600; color: #111; margin-bottom: 6px; }
+  .faq-item p { font-size: 13px; color: #666; line-height: 1.6; }
+
+  /* FOOTER */
+  .footer { text-align: center; padding-top: 32px; }
+  .footer p { font-size: 12px; color: #aaa; line-height: 1.8; }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 24px; }
+    .proof { grid-template-columns: repeat(3, 1fr); }
+    .proof-card .num { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="badge">Ayurvedic gut reset — for Indian parents</div>
+    <h1>Stop your parents' daily acidity.<br><span>The food science they already believe in.</span></h1>
+    <p>You can't be there every day. But Sattva can. We combine your parent's daily medications, their home state, and their diet — and give them a personalised 5-day spice protocol to fix chronic acidity and bloating. No weird diets. Just their own kitchen.</p>
+    <a href="#signup" class="cta-btn">Join the ₹1 trial — reserve your spot</a>
+    <p class="cta-sub">5-day personalised gut reset · Cancel anytime · No spam</p>
+  </div>
+
+  <hr />
+
+  <!-- PROBLEM -->
+  <div class="problem">
+    <h2>"I keep telling Amma to eat right. She won't listen to me — but she'll listen to Ayurveda."</h2>
+    <p>If you've watched your parents suffer through antacids every night, skip meals because of bloating, or ignore every modern diet tip you share — Sattva was built for your family.</p>
+  </div>
+
+  <hr />
+
+  <!-- HOW IT WORKS -->
+  <p class="section-label">How it works</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>You fill in your parent's details</h3>
+        <p>Their daily medications (BP, thyroid, diabetes), home state, and what they eat. Takes 3 minutes.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>We diagnose their Prakriti</h3>
+        <p>Vata, Pitta, or Kapha — personalised to their body, their medications, and their region's food culture.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h3>They get a 5-day spice protocol on WhatsApp</h3>
+        <p>Simple. Using spices already in their kitchen — jeera, ajwain, saunf, haldi. No app download needed.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h3>You see the difference in 5 days</h3>
+        <p>Less bloating. Better sleep. A parent who feels heard — not lectured.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- WHATSAPP -->
+  <div class="wa-strip">
+    <p>Daily check-ins delivered to your parent's WhatsApp — no app download needed on their side.</p>
+  </div>
+
+  <hr />
+
+  <!-- PROOF -->
+  <p class="section-label">Early numbers</p>
+  <div class="proof">
+    <div class="proof-card">
+      <div class="num">50+</div>
+      <div class="label">Parents on the waitlist</div>
+    </div>
+    <div class="proof-card">
+      <div class="num">5 days</div>
+      <div class="label">To feel a real difference</div>
+    </div>
+    <div class="proof-card">
+      <div class="num">₹1</div>
+      <div class="label">To try it. Zero risk.</div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- TESTIMONIAL -->
+  <p class="section-label">What people are saying</p>
+  <div class="testimonial">
+    <p>"I've been buying antacids for my father for 3 years. This is the first thing that actually made sense to him — because it speaks his language."</p>
+    <div class="attr">— Priya, 27, Bangalore (waitlist member)</div>
+  </div>
+
+  <hr />
+
+  <!-- PRICING + FORM -->
+  <div class="pricing" id="signup">
+    <div class="tag">Limited beta spots</div>
+    <div class="price">₹1 <span>for 5 days</span></div>
+    <p class="desc">Then ₹499/month for the daily dashboard and WhatsApp check-ins.<br>Cancel before day 6 and pay nothing more. No questions asked.</p>
+    <div class="form-wrap">
+      <input type="text" placeholder="Your name" />
+      <input type="tel" placeholder="Your WhatsApp number" />
+      <input type="text" placeholder="Parent's home state (e.g. Tamil Nadu)" />
+      <a href="#" class="cta-btn">Reserve my parent's spot →</a>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- FAQ -->
+  <p class="section-label">Common questions</p>
+  <div class="faq">
+    <div class="faq-item">
+      <h4>Does my parent need to download anything?</h4>
+      <p>No. Everything is delivered on WhatsApp. They just need to read and follow — that's it.</p>
+    </div>
+    <div class="faq-item">
+      <h4>What if their doctor has already given a diet plan?</h4>
+      <p>Sattva works alongside modern medicine, not against it. We cross-reference their medications so there are no conflicts.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Is this safe for someone on BP or thyroid medication?</h4>
+      <p>Yes. You enter their medications during setup and our protocol is adjusted accordingly. We recommend consulting their doctor for any major changes.</p>
+    </div>
+    <div class="faq-item">
+      <h4>What happens after 5 days?</h4>
+      <p>If your parent feels better, the subscription continues at ₹499/month with daily tips and weekly check-ins. Cancel anytime before day 6 and you pay nothing more.</p>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>Sattva is built with love for Indian families.<br>
+    Questions? WhatsApp us: <strong>+91 XXXXX XXXXX</strong><br><br>
+    <em>This is a wellness program, not a medical service. Always consult your doctor for medical advice.</em></p>
+  </div>
+
+</div>
+</body>
+</html>
