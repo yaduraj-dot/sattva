@@ -1,1 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sattva — Find Your Parent's Prakriti</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#FFFBF5;color:#1a1a1a;min-height:100vh}
+.topbar{background:#E8820C;color:#fff;text-align:center;padding:10px;font-size:13px;font-weight:500}
+.container{max-width:560px;margin:0 auto;padding:24px 20px 60px}
+.progress-wrap{margin-bottom:28px}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:#B85C00;font-weight:600;margin-bottom:8px}
+.progress-bar{background:#F0E8DC;border-radius:99px;height:6px}
+.progress-fill{background:#E8820C;height:6px;border-radius:99px;transition:width 0.4s ease}
+.section-header{background:#FEF3E2;border:1px solid #F5C07A;border-radius:12px;padding:14px 18px;margin-bottom:20px}
+.section-num{font-size:11px;font-weight:700;color:#B85C00;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px}
+.section-header h2{font-size:18px;font-weight:700;color:#1a1a1a}
+.question{margin-bottom:24px}
+.question-label{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px;line-height:1.4}
+.question-why{font-size:12px;color:#B85C00;line-height:1.5;margin-bottom:12px;font-style:italic}
+.options{display:flex;flex-direction:column;gap:8px}
+.option{background:#fff;border:1.5px solid #E0D5C8;border-radius:10px;padding:13px 16px;cursor:pointer;font-size:14px;color:#333;transition:all 0.15s;display:flex;align-items:center;gap:10px}
+.option:hover{border-color:#E8820C;background:#FEF3E2}
+.option.selected{border-color:#E8820C;background:#FEF3E2;color:#B85C00;font-weight:600}
+.dot{width:18px;height:18px;min-width:18px;border-radius:50%;border:2px solid #ccc;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.option.selected .dot{border-color:#E8820C;background:#E8820C}
+.option.selected .dot::after{content:'';width:6px;height:6px;background:#fff;border-radius:50%;display:block}
+.checkbox-option{background:#fff;border:1.5px solid #E0D5C8;border-radius:10px;padding:13px 16px;cursor:pointer;font-size:14px;color:#333;transition:all 0.15s;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.checkbox-option:hover{border-color:#E8820C;background:#FEF3E2}
+.checkbox-option.selected{border-color:#E8820C;background:#FEF3E2;color:#B85C00;font-weight:600}
+.box{width:18px;height:18px;min-width:18px;border-radius:4px;border:2px solid #ccc;display:flex;align-items:center;justify-content:center;font-size:11px}
+.checkbox-option.selected .box{border-color:#E8820C;background:#E8820C;color:#fff}
+.select-input{width:100%;padding:13px 16px;border-radius:10px;border:1.5px solid #E0D5C8;font-size:15px;background:#fff;color:#1a1a1a;outline:none;appearance:none}
+.select-input:focus{border-color:#E8820C}
+.nav{display:flex;gap:10px;margin-top:28px}
+.btn-back{flex:1;background:#fff;border:1.5px solid #E0D5C8;color:#888;font-size:15px;font-weight:600;padding:14px;border-radius:12px;cursor:pointer}
+.btn-next{flex:2;background:#E8820C;border:none;color:#fff;font-size:16px;font-weight:700;padding:14px;border-radius:12px;cursor:pointer}
+.btn-back:hover{border-color:#B85C00;color:#B85C00}
+.btn-next:hover{background:#CF6F00}
+.result{display:none}
+.result-hero{text-align:center;padding:28px 0 20px}
+.result-badge{display:inline-block;background:#E8820C;color:#fff;font-size:12px;font-weight:700;padding:6px 18px;border-radius:20px;margin-bottom:14px}
+.result-hero h1{font-size:26px;font-weight:800;color:#1a1a1a;margin-bottom:8px;line-height:1.3}
+.result-hero h1 span{color:#E8820C}
+.result-hero p{font-size:14px;color:#666;line-height:1.7}
+.result-card{background:#fff;border:1px solid #F0E8DC;border-radius:16px;padding:20px;margin-bottom:12px}
+.result-card h3{font-size:12px;font-weight:700;color:#B85C00;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px}
+.result-card p{font-size:14px;color:#444;line-height:1.75}
+.dosha-bar{margin-bottom:10px}
+.dosha-bar-label{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:4px}
+.dosha-bar-track{background:#F0E8DC;border-radius:99px;height:8px}
+.dosha-bar-fill{height:8px;border-radius:99px;transition:width 0.8s ease}
+.vata-fill{background:#7B61FF}
+.pitta-fill{background:#E8820C}
+.kapha-fill{background:#2E9E5A}
+.insight-box{background:#FEF3E2;border:1px solid #F5C07A;border-radius:12px;padding:16px 18px;margin-bottom:12px}
+.insight-label{font-size:11px;font-weight:700;color:#B85C00;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px}
+.med-box{background:#FFF8E1;border:1px solid #FFD54F;border-radius:12px;padding:16px 18px;margin-bottom:12px}
+.med-label{font-size:11px;font-weight:700;color:#E65100;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
+.med-box ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.med-box ul li{font-size:13px;color:#5D4037;line-height:1.6;padding-left:20px;position:relative}
+.med-box ul li::before{content:"⚠";position:absolute;left:0;font-size:11px}
+.day1-wrap{background:#fff;border:1px solid #F0E8DC;border-radius:16px;overflow:hidden;margin-bottom:12px}
+.day1-top{background:#E8820C;padding:14px 20px}
+.day1-top .free-label{font-size:11px;font-weight:700;color:rgba(255,255,255,0.8);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px}
+.day1-top h3{font-size:18px;font-weight:800;color:#fff}
+.day1-top p{font-size:12px;color:rgba(255,255,255,0.75);margin-top:4px}
+.day1-body{padding:16px 20px 20px}
+.time-block{background:#FFFBF5;border:1px solid #F0E8DC;border-radius:12px;padding:16px;margin-bottom:10px}
+.time-block:last-child{margin-bottom:0}
+.time-label{font-size:11px;font-weight:700;color:#B85C00;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+.time-block h4{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:6px}
+.time-block p{font-size:13px;color:#555;line-height:1.65}
+.spice-tag{display:inline-block;background:#FEF3E2;color:#B85C00;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:8px;border:1px solid #F5C07A}
+.locked-days{margin-bottom:12px}
+.locked-day{background:#fff;border:1px solid #F0E8DC;border-radius:14px;padding:16px 20px;margin-bottom:8px;display:flex;align-items:center;gap:14px}
+.lock-icon{width:36px;height:36px;min-width:36px;background:#F0E8DC;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px}
+.locked-day-content .day-num{font-size:11px;font-weight:700;color:#B85C00;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px}
+.locked-day-content .day-teaser{font-size:13px;color:#888;line-height:1.5;font-style:italic}
+.cta-box{background:#E8820C;border-radius:18px;padding:28px 22px;text-align:center;margin-top:20px}
+.cta-box h2{font-size:21px;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.3}
+.cta-box p{font-size:13px;color:rgba(255,255,255,0.85);margin-bottom:16px;line-height:1.6}
+.cta-price{font-size:46px;font-weight:800;color:#fff;line-height:1;margin-bottom:4px}
+.cta-price span{font-size:16px;font-weight:400;opacity:0.8}
+.cta-white-btn{display:block;background:#fff;color:#E8820C;font-size:17px;font-weight:700;padding:16px;border-radius:12px;text-decoration:none;margin-top:16px}
+.cta-fine{font-size:11px;color:rgba(255,255,255,0.65);margin-top:10px;line-height:1.6}
+.step{display:none}
+.step.active{display:block}
+</style>
+</head>
+<body>
+<div class="topbar">🌿 Sattva — Personalised Ayurvedic Gut Reset</div>
+<div class="container">
+<div class="progress-wrap" id="progressWrap">
+<div class="progress-label"><span id="progressSection">Section 1 of 5</span><span id="progressCount">Questions 1–3</span></div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:7%"></div></div>
+</div>
 
+<!-- STEP 1 -->
+<div class="step active" id="step1">
+<div class="section-header"><div class="section-num">Section 1 — Who They Are</div><h2>Let's start with the basics about your parent.</h2></div>
+<div class="question">
+<div class="question-label">1. What is your parent's home state?</div>
+<div class="question-why">Ayurveda is deeply regional. Tamil Nadu cooking creates completely different gut conditions than Punjab. We personalise the protocol to their food culture.</div>
+<select class="select-input" id="q1">
+<option value="">Select state...</option>
+<option value="south">Andhra Pradesh</option>
+<option value="northeast">Assam</option>
+<option value="east">Bihar</option>
+<option value="north">Delhi</option>
+<option value="west">Goa</option>
+<option value="west">Gujarat</option>
+<option value="north">Haryana</option>
+<option value="north">Himachal Pradesh</option>
+<option value="south">Karnataka</option>
+<option value="south">Kerala</option>
+<option value="north">Madhya Pradesh</option>
+<option value="west">Maharashtra</option>
+<option value="east">Odisha</option>
+<option value="north">Punjab</option>
+<option value="north">Rajasthan</option>
+<option value="south">Tamil Nadu</option>
+<option value="south">Telangana</option>
+<option value="north">Uttar Pradesh</option>
+<option value="north">Uttarakhand</option>
+<option value="east">West Bengal</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div class="question">
+<div class="question-label">2. Your parent's age range?</div>
+<div class="question-why">After 50, Vata naturally increases. Post-menopausal women experience a sharper shift that changes digestion significantly.</div>
+<select class="select-input" id="q2">
+<option value="">Select age range...</option>
+<option value="50-55">50–55</option>
+<option value="56-60">56–60</option>
+<option value="61-65">61–65</option>
+<option value="66-70">66–70</option>
+<option value="70+">70+</option>
+</select>
+</div>
+<div class="question">
+<div class="question-label">3. Gender?</div>
+<div class="question-why">Hormonal shifts in women post-menopause create specific Vata aggravations that need targeted protocols different from men of the same age.</div>
+<div class="options" id="q3">
+<div class="option" onclick="sel('q3',this,'male')"><div class="dot"></div>Male</div>
+<div class="option" onclick="sel('q3',this,'female')"><div class="dot"></div>Female</div>
+</div>
+</div>
+<div class="nav"><button class="btn-next" onclick="go(1,2)">Continue →</button></div>
+</div>
+
+<!-- STEP 2 -->
+<div class="step" id="step2">
+<div class="section-header"><div class="section-num">Section 2 — Their Medications</div><h2>This is where we get serious about safety.</h2></div>
+<div class="question">
+<div class="question-label">4. Which medications does your parent take daily? (Select all that apply)</div>
+<div class="question-why">Metformin depletes B12 and disrupts gut bacteria. Thyronorm absorption is blocked by certain foods. We cross-reference everything before suggesting anything.</div>
+<div class="checkbox-option" onclick="toggleMed(this,'metformin')"><div class="box">✓</div>Metformin (Diabetes)</div>
+<div class="checkbox-option" onclick="toggleMed(this,'thyronorm')"><div class="box">✓</div>Thyronorm / Eltroxin (Thyroid)</div>
+<div class="checkbox-option" onclick="toggleMed(this,'bp')"><div class="box">✓</div>BP medication (Amlodipine, Telmisartan etc.)</div>
+<div class="checkbox-option" onclick="toggleMed(this,'statins')"><div class="box">✓</div>Statins / Cholesterol (Atorvastatin etc.)</div>
+<div class="checkbox-option" onclick="toggleMed(this,'antacids')"><div class="box">✓</div>Regular antacids (Digene, Pantop, Omez)</div>
+<div class="checkbox-option" onclick="toggleMed(this,'none')"><div class="box">✓</div>None of the above</div>
+</div>
+<div class="nav"><button class="btn-back" onclick="go(2,1)">← Back</button><button class="btn-next" onclick="go(2,3)">Continue →</button></div>
+</div>
+
+<!-- STEP 3 -->
+<div class="step" id="step3">
+<div class="section-header"><div class="section-num">Section 3 — Their Body</div><h2>The body holds the most honest answers.</h2></div>
+<div class="question">
+<div class="question-label">5. What is their natural body build — their lifelong frame, not current weight?</div>
+<div class="question-why">Body frame is one of the most reliable Prakriti indicators regardless of current weight or age.</div>
+<div class="options" id="q5">
+<div class="option" onclick="sel('q5',this,'vata')"><div class="dot"></div>Thin and light — always been lean, hard to gain weight</div>
+<div class="option" onclick="sel('q5',this,'pitta')"><div class="dot"></div>Medium and muscular — moderate build, gains and loses easily</div>
+<div class="option" onclick="sel('q5',this,'kapha')"><div class="dot"></div>Heavy and stocky — naturally heavier, hard to lose weight</div>
+</div>
+</div>
+<div class="question">
+<div class="question-label">6. How is their skin usually?</div>
+<div class="question-why">Skin is a direct external window into internal dosha balance. This one question has 70% diagnostic accuracy in Ayurvedic practice.</div>
+<div class="options" id="q6">
+<div class="option" onclick="sel('q6',this,'vata')"><div class="dot"></div>Dry, rough, or thin — cracks easily in winter</div>
+<div class="option" onclick="sel('q6',this,'pitta')"><div class="dot"></div>Oily or combination — prone to redness or rashes</div>
+<div class="option" onclick="sel('q6',this,'kapha')"><div class="dot"></div>Thick, smooth, and moist — rarely ever dry</div>
+</div>
+</div>
+<div class="question">
+<div class="question-label">7. How do they handle hot weather?</div>
+<div class="question-why">Thermal response is a strong Prakriti marker that cannot be faked by lifestyle choices.</div>
+<div class="options" id="q7">
+<div class="option" onclick="sel('q7',this,'vata')"><div class="dot"></div>Love warmth — feel better in summer, hate cold</div>
+<div class="option" onclick="sel('q7',this,'pitta')"><div class="dot"></div>Overheat easily — sweat heavily, prefer cool environments</div>
+<div class="option" onclick="sel('q7',this,'kapha')"><div class="dot"></div>Feel sluggish in heat and humidity — prefer mild weather</div>
+</div>
+</div>
+<div class="nav"><button class="btn-back" onclick="go(3,2)">← Back</button><button class="btn-next" onclick="go(3,4)">Continue →</button></div>
+</div>
+
+<!-- STEP 4 -->
+<div class="step" id="step4">
+<div class="section-header"><div class="section-num">Section 4 — Their Digestion</div><h2>This is the core of what we are fixing.</h2></div>
+<div class="question">
+<div class="question-label">8. What happens most often after a meal?</div>
+<div class="question-why">This single question has the highest diagnostic weight. Bloating = Vata gut. Burning = Pitta gut. Heaviness = Kapha gut.</div>
+<div class="options" id="q8">
+<div class="option" onclick="sel('q8',this,'vata')"><div class="dot"></div>Bloating, gas, or gurgling sounds</div>
+<div class="option" onclick="sel('q8',this,'pitta')"><div class="dot"></div>Burning sensation or acidity</div>
+<div class="option" onclick="sel('q8',this,'kapha')"><div class="dot"></div>Heaviness, fullness, or nausea</div>
+<div class="option" onclick="sel('q8',this,'mixed')"><div class="dot"></div>A mix — varies meal to meal</div>
+</div>
+</div>
+<div class="question">
+<div class="question-label">9. How is their appetite through the day?</div>
+<div class="question-why">Appetite pattern is one of the most consistent Prakriti markers across all age groups.</div>
+<div class="options" id="q9">
+<div class="option" onclick="sel('q9',this,'vata')"><div class="dot"></div>Irregular — sometimes very hungry, sometimes forget to eat</div>
+<div class="option" onclick="sel('q9',this,'pitta')"><div class="dot"></div>Strong and intense — get irritable if meal is late</div>
+<div class="option" onclick="sel('q9',this,'kapha')"><div class="dot"></div>Low — can easily skip meals without discomfort</div>
+</div>
+</div>
+<div class="question">
+<div class="question-label">10. How often do they experience acidity or heartburn?</div>
+<div class="question-why">This is your parent's baseline metric. We measure this to show you real improvement by day 5.</div>
+<div class="options" id="q10">
+<div class="option" onclick="sel('q10',this,'daily')"><div class="dot"></div>Daily — almost every day after at least one meal</div>
+<div class="option" onclick="sel('q10',this,'frequent')"><div class="dot"></div>Frequently — 3 to 5 times a week</div>
+<div class="option" onclick="sel('q10',this,'occasional')"><div class="dot"></div>Occasionally — once or twice a week</div>
+<div class="option" onclick="sel('q10',this,'rare')"><div class="dot"></div>Rarely — only after specific trigger foods</div>
+</div>
+</div>
+<div class="question">
+<div class="question-label">11. What does a typical full lunch look like?</div>
+<div class="question-why">This tells us their carbohydrate load and spice profile so we suggest additions, not replacements they will reject.</div>
+<div class="options" id="q11">
+<div class="option" onclick="sel('q11',this,'rice')"><div class="dot"></div>Rice-based — dal, sambar, rasam, sabzi with rice</div>
+<div class="option" onclick="sel('q11',this,'roti')"><div class="dot"></div>Roti-based — sabzi, dal, curry with chapati</div>
+<div class="option" onclick="sel('q11',this,'mixed')"><div class="dot"></div>Mixed — varies day to day</div>
+<div class="option" onclick="sel('q11',this,'light')"><div class="dot"></div>Light — small portions, often skips a full meal</div>
+</div>
+</div>
+<div class="nav"><button class="btn-back" onclick="go(4,3)">← Back</button><button class="btn-next" onclick="go(4,5)">Continue →</button></div>
+</div>
+
+<!-- STEP 5 -->
+<div class="step" id="step5">
+<div class="section-header"><div class="section-num">Section 5 — Mind, Sleep and Habits</div><h2>The gut and mind are more connected than most people know.</h2></div>
+<div class="question">
+<div class="question-label">12. How do they usually sleep?</div>
+<div class="question-why">Sleep quality is a precise dosha indicator that confirms our diagnosis.</div>
+<div class="options" id="q12">
+<div class="option" onclick="sel('q12',this,'vata')"><div class="dot"></div>Light and interrupted — wakes easily, hard to fall back asleep</div>
+<div class="option" onclick="sel('q12',this,'pitta')"><div class="dot"></div>Moderate — takes time to fall asleep, sometimes feels hot at night</div>
+<div class="option" onclick="sel('q12',this,'kapha')"><div class="dot"></div>Deep and heavy — sleeps a lot but always wakes up groggy</div>
+</div>
+</div>
+<div class="question">
+<div class="question-label">13. How do they handle stress or bad news?</div>
+<div class="question-why">Stress pattern directly impacts gut health through the gut-brain axis. This is physiology, not philosophy.</div>
+<div class="options" id="q13">
+<div class="option" onclick="sel('q13',this,'vata')"><div class="dot"></div>Become anxious, worried, or overthink things</div>
+<div class="option" onclick="sel('q13',this,'pitta')"><div class="dot"></div>Become irritable, sharp-tongued, or controlling</div>
+<div class="option" onclick="sel('q13',this,'kapha')"><div class="dot"></div>Withdraw quietly, become slow and unmotivated</div>
+</div>
+</div>
+<div class="question">
+<div class="question-label">14. What time do they usually eat dinner?</div>
+<div class="question-why">Eating after 8pm is the single biggest cause of Ama buildup in people over 50. This one habit explains 60% of chronic acidity cases.</div>
+<div class="options" id="q14">
+<div class="option" onclick="sel('q14',this,'early')"><div class="dot"></div>Before 7pm — early dinner habit</div>
+<div class="option" onclick="sel('q14',this,'medium')"><div class="dot"></div>7pm to 8:30pm</div>
+<div class="option" onclick="sel('q14',this,'late')"><div class="dot"></div>After 8:30pm — late dinner</div>
+</div>
+</div>
+<div class="question">
+<div class="question-label">15. Do they drink water during meals?</div>
+<div class="question-why">Drinking water mid-meal dilutes digestive fire — one of the easiest fixes that often reduces acidity within 48 hours.</div>
+<div class="options" id="q15">
+<div class="option" onclick="sel('q15',this,'during')"><div class="dot"></div>Yes — drink water while eating</div>
+<div class="option" onclick="sel('q15',this,'after')"><div class="dot"></div>Right after the meal — within 15 minutes</div>
+<div class="option" onclick="sel('q15',this,'before')"><div class="dot"></div>Before the meal only</div>
+<div class="option" onclick="sel('q15',this,'rarely')"><div class="dot"></div>Rarely drink water around meals</div>
+</div>
+</div>
+<div class="nav"><button class="btn-back" onclick="go(5,4)">← Back</button><button class="btn-next" onclick="showResult()">See My Parent's Diagnosis →</button></div>
+</div>
+
+<!-- RESULT -->
+<div class="result" id="resultPage">
+<div class="result-hero">
+<div class="result-badge" id="rBadge">Prakriti Identified</div>
+<h1>Your parent is a <span id="doshaName">Pitta-Vata</span> type</h1>
+<p id="rSubtitle">Here is their personalised gut health diagnosis.</p>
+</div>
+<div class="result-card">
+<h3>Dosha Balance</h3>
+<div class="dosha-bar"><div class="dosha-bar-label"><span>Vata</span><span id="vPct">0%</span></div><div class="dosha-bar-track"><div class="dosha-bar-fill vata-fill" id="vBar" style="width:0%"></div></div></div>
+<div class="dosha-bar"><div class="dosha-bar-label"><span>Pitta</span><span id="pPct">0%</span></div><div class="dosha-bar-track"><div class="dosha-bar-fill pitta-fill" id="pBar" style="width:0%"></div></div></div>
+<div class="dosha-bar"><div class="dosha-bar-label"><span>Kapha</span><span id="kPct">0%</span></div><div class="dosha-bar-track"><div class="dosha-bar-fill kapha-fill" id="kBar" style="width:0%"></div></div></div>
+</div>
+<div class="insight-box" id="gutInsight"></div>
+<div class="med-box" id="medBox" style="display:none"></div>
+<div class="day1-wrap">
+<div class="day1-top"><div class="free-label">Your Free Preview</div><h3>Day 1 — Unlocked</h3><p id="d1Sub"></p></div>
+<div class="day1-body"><div id="d1Morning" class="time-block"></div><div id="d1Afternoon" class="time-block"></div><div id="d1Evening" class="time-block"></div></div>
+</div>
+<div class="locked-days" id="lockedDays"></div>
+<div class="cta-box">
+<h2>Unlock Days 2–5 and start healing.</h2>
+<p>Get the complete 5-day protocol on your parent's WhatsApp — personalised to their body, medications, and kitchen.</p>
+<div class="cta-price">₹1 <span>for 5 days</span></div>
+<a href="index.html#signup" class="cta-white-btn">Unlock the Full Protocol →</a>
+<p class="cta-fine">Then ₹499/month · Cancel before day 6 · Pay nothing more<br>No app download needed for your parent</p>
+</div>
+</div>
+</div>
+
+<script>
+var ans={},meds=[];
+function sel(q,el,v){document.querySelectorAll('#'+q+' .option').forEach(function(o){o.classList.remove('selected')});el.classList.add('selected');ans[q]=v}
+function toggleMed(el,v){el.classList.toggle('selected');var i=meds.indexOf(v);if(i>-1)meds.splice(i,1);else meds.push(v)}
+function go(from,to){document.getElementById('step'+from).classList.remove('active');document.getElementById('step'+to).classList.add('active');var s=['','Section 1 of 5','Section 2 of 5','Section 3 of 5','Section 4 of 5','Section 5 of 5'];var q=['','Questions 1–3','Question 4','Questions 5–7','Questions 8–11','Questions 12–15'];var p=[0,7,27,47,67,87];document.getElementById('progressSection').textContent=s[to];document.getElementById('progressCount').textContent=q[to];document.getElementById('progressFill').style.width=p[to]+'%';window.scrollTo(0,0)}
+function calc(){var v=0,p=0,k=0;['q5','q6','q7','q8','q9','q12','q13'].forEach(function(q){if(ans[q]==='vata')v++;else if(ans[q]==='pitta')p++;else if(ans[q]==='kapha')k++;else if(ans[q]==='mixed'){v++;p++}});if(ans.q10==='daily'||ans.q10==='frequent')p++;if(ans.q14==='late')v++;if(ans.q2==='66-70'||ans.q2==='70+')v++;if(ans.q3==='female')v++;var t=(v+p+k)||1;return{v:v,p:p,k:k,t:t}}
+function dom(v,p,k){if(v>=p&&v>=k)return'Vata';if(p>=v&&p>=k)return'Pitta';return'Kapha'}
+function sec(d,v,p,k){if(d==='Vata')return p>=k?'Pitta':'Kapha';if(d==='Pitta')return v>=k?'Vata':'Kapha';return v>=p?'Vata':'Pitta'}
+function stateText(){var el=document.getElementById('q1');return el.options[el.selectedIndex]?el.options[el.selectedIndex].text:'their home state'}
+function stateVal(){var el=document.getElementById('q1');return el.options[el.selectedIndex]?el.options[el.selectedIndex].value:'other'}
+function gutText(d){var t={Vata:'Your parent\'s gut is Vata-aggravated. Their digestive fire is irregular and unstable — sometimes strong, often insufficient. The result is bloating, trapped gas, and unpredictable digestion that varies day to day. This worsens with anxiety, irregular meal times, and cold or raw foods. It is extremely common in people over 60 and almost always addressable through diet timing and warm cooked foods.',Pitta:'Your parent\'s gut is Pitta-aggravated. Their digestive fire is too intense — creating excess heat that manifests as acidity, heartburn, and burning after meals. The stomach produces more acid than the gut lining can comfortably handle. This worsens with late dinners, oily or spicy food, and chronic stress. It is the most common gut pattern in Indian adults over 50 — and the most responsive to Ayurvedic spice intervention.',Kapha:'Your parent\'s gut is Kapha-aggravated. Their digestive fire is slow and sluggish — food sits in the stomach far longer than it should, creating heaviness and a persistent feeling of fullness even hours after eating. This is common in those who eat heavy meals, move less, or have a naturally slower metabolism. The fix requires stimulating Agni, not suppressing it.'};return t[d]}
+function day1Data(d,sv,late,waterDuring){var rn={south:'South Indian rice-based meals are high in fermentable carbohydrates — great for energy, but they ferment quickly in an aggravated gut.',north:'North Indian roti-based diets with heavy dal create a high-protein load that demands strong digestive fire.',west:'Western Indian cooking is often high in oil which can aggravate both Pitta and Kapha simultaneously.',east:'Eastern Indian cooking with mustard oil is rich in Omega-3s but can be heavy for a sluggish digestive system.',other:'Your regional food culture has been factored into the protocol.'};var r=rn[sv]||rn.other;var P={Vata:{sub:'Stabilising a variable gas-prone digestive system',morning:{t:'Morning — 6:30 to 7:00am (before breakfast)',h:'Warm Jeera-Ajwain Water',d:'Boil 1 glass of water with ½ tsp jeera (cumin) and ¼ tsp ajwain (carom seeds) for 5 minutes. Strain and drink warm — not hot. Jeera ignites digestive fire gently. Ajwain directly expels trapped Vata gas from the lower intestine. This is the single most powerful Vata gut stabiliser in classical Ayurveda. Do not skip this on Day 1.',tag:'Jeera + Ajwain'},afternoon:{t:'After Lunch — within 10 minutes of finishing',h:'Saunf and Rock Salt',d:'Take ½ tsp saunf (fennel seeds) mixed with a tiny pinch of rock salt (sendha namak). Chew slowly. Saunf relaxes the intestinal muscles that cause cramping and bloating. The rock salt stimulates Agni without heating the body. '+r,tag:'Saunf + Rock Salt'},evening:{t:late?'Evening — Critical Timing Note':'Evening — 30 minutes before dinner',h:late?'Move Dinner Earlier Tonight':'Warm Ginger Lassi',d:late?'Your parent eats dinner after 8:30pm — this is the biggest single driver of Vata gas in people over 50. Tonight try to eat before 8pm. Even a 30-minute shift makes a measurable difference. Prepare warm cooked khichdi for dinner — it is the easiest food for a Vata gut to process and will reduce tomorrow morning\'s bloating noticeably.':'Mix 2 tbsp plain curd with ½ glass warm water, a pinch of roasted jeera powder, and a tiny pinch of fresh ginger. Drink 30 minutes before dinner. This primes the digestive fire before the evening meal — the time when Vata is naturally highest and digestion is weakest.',tag:late?'Timing Fix — High Priority':'Jeera + Ginger'}},Pitta:{sub:'Cooling an overheated acid-producing digestive system',morning:{t:'Morning — 6:00 to 6:30am (before breakfast)',h:'Amla Water',d:'Take 1 tsp amla (Indian gooseberry) powder in a glass of room-temperature water. Do NOT add honey or lemon. Amla is the single most powerful Pitta coolant in Ayurveda — it reduces stomach acid production naturally, repairs the gastric mucosa, and provides more Vitamin C than any supplement. Taken on empty stomach it works within 3 days.'+(waterDuring?' Note: Your parent drinks water during meals — stop this from today. It dilutes stomach acid and creates a cycle of overproduction.':''),tag:'Amla — Pitta\'s most powerful coolant'},afternoon:{t:'After Lunch — immediately after finishing',h:'Saunf Water',d:'Take 1 tsp saunf (fennel seeds) and chew slowly after lunch. Alternatively soak 1 tsp saunf in ½ glass of room-temperature water for 10 minutes and drink. Saunf has a direct cooling effect on Pachaka Pitta — the specific digestive fire in the small intestine that is overactive in your parent\'s case. This is why restaurants keep saunf at the counter. It is not a gesture — it is medicine.',tag:'Saunf — Pachaka Pitta coolant'},evening:{t:late?'Dinner Time — Critical':'Dinner Time',h:late?'Move Dinner to Before 8pm — Non-Negotiable':'Avoid These 3 Foods Tonight',d:late?'Your parent eats after 8:30pm. For Pitta types this is the most dangerous habit. Pitta peaks between 10pm and 2am. When undigested food sits in the stomach during this window the Pitta heat generates maximum acid. The burning they feel in the morning was manufactured overnight. Move dinner to before 8pm starting tonight. This one change reduces morning acidity by 40% in most Pitta types within 3 days.':'Tonight avoid three things: (1) Curd or buttermilk after sunset — they increase Pitta at night. (2) Tomato-based dishes — extremely acidifying for Pitta types. (3) Eating quickly or while stressed — Pitta digestion is most disrupted by emotional agitation during meals.',tag:late?'Timing Fix — Highest Priority':'Evening Food Rules'}},Kapha:{sub:'Igniting a slow sluggish digestive fire',morning:{t:'Morning — 6:00am (before anything else)',h:'Trikatu in Warm Water',d:'Mix ¼ tsp Trikatu powder (available at any Ayurvedic pharmacy — blend of dry ginger, black pepper, and pippali) in warm water with ½ tsp honey. Drink on empty stomach. Trikatu is the most potent Kapha digestive stimulant in classical Ayurveda. Your parent\'s heaviness after meals is caused by insufficient Agni — Trikatu addresses this directly. You will notice reduced post-meal heaviness from Day 1 itself.',tag:'Trikatu — Kapha\'s digestive igniter'},afternoon:{t:'During Lunch — 5 minutes before eating',h:'Ginger and Rock Salt Starter',d:'Give your parent a small slice of fresh ginger the size of their thumbnail with a pinch of rock salt and a squeeze of lemon — 5 minutes before the main meal. This pre-lunch ritual activates salivary enzymes and stomach acid production before food arrives. For a Kapha gut that produces insufficient digestive juices this is the equivalent of warming up an engine before a long drive. '+r,tag:'Ginger + Rock Salt starter'},evening:{t:late?'Dinner — Critical Timing':'Dinner Time',h:late?'Eat Before 7pm Tonight':'Light Dinner Rule Starting Tonight',d:late?'Your parent eats after 8:30pm. For Kapha types this is the primary cause of morning heaviness. Kapha digestion is slowest in the evening. A heavy meal eaten late sits undigested all night creating Ama that accumulates over years. Move dinner to before 7pm if possible. Tonight make it the lightest meal of the day — a small bowl of moong dal soup or simple khichdi is ideal.':'Starting tonight make dinner the smallest meal of the day — half the portion of lunch. No curd, no paneer, no heavy dal at night. A bowl of thin moong dal soup is ideal. Kapha digestion is at its weakest between 6pm and 10pm. A light dinner does more for a Kapha gut than any supplement or spice.',tag:late?'Timing Fix — Highest Priority':'Light Dinner Protocol'}}};return P[d]}
+function lockedData(d,hasThy,hasMet){var L={Vata:[{day:'Day 2',t:'"The two foods your parent eats every day that are silently feeding Vata gas — most families are shocked"'},{day:'Day 3',t:'"The 7pm warm oil ritual that resets the nervous system and cuts nighttime bloating by morning"'},{day:'Day 4',t:'"Why cold water from the fridge is the worst thing a Vata gut can receive — and the exact temperature that works"'},{day:'Day 5',t:'"The complete Vata gut reset meal plan — designed for an Indian kitchen using only what you already have"'}],Pitta:[{day:'Day 2',t:hasThy?'"Your parent takes Thyronorm — here is the exact time to take it and the 3 foods that silently block its absorption every morning"':'"The single afternoon habit that doubles Pitta acid production — almost every Indian parent over 50 does this"'},{day:'Day 3',t:'"The coriander-mint cooler that Ayurvedic physicians prescribe for chronic Pitta acidity — takes 3 minutes to prepare"'},{day:'Day 4',t:hasMet?'"Metformin and Pitta together — why your parent\'s gut lining is more inflamed than the doctor realises and what heals it"':'"Why your parent\'s acidity gets worse in summer and the seasonal cooling protocol that prevents it"'},{day:'Day 5',t:'"The complete 30-day Pitta maintenance plan — so the acidity never comes back to daily"'}],Kapha:[{day:'Day 2',t:'"The morning walk timing that activates Kapha digestion — it is not about distance it is about when"'},{day:'Day 3',t:'"The 3 foods Indian families eat thinking they are healthy — that are actively slowing your parent\'s digestion every day"'},{day:'Day 4',t:hasMet?'"Metformin and Kapha gut — the combination that causes maximum heaviness and the B12 protocol that fixes it"':'"The dry ginger and honey morning ritual Ayurvedic texts prescribe specifically for Kapha heaviness after 55"'},{day:'Day 5',t:'"Full Kapha ignition protocol — the complete plan to turn a sluggish gut into a strong one within 30 days"'}]};return L[d]}
+function showResult(){
+document.getElementById('step5').classList.remove('active');
+document.getElementById('progressWrap').style.display='none';
+document.getElementById('resultPage').style.display='block';
+var c=calc();
+var vP=Math.round((c.v/c.t)*100);
+var pP=Math.round((c.p/c.t)*100);
+var kP=Math.round((c.k/c.t)*100);
+document.getElementById('vPct').textContent=vP+'%';
+document.getElementById('pPct').textContent=pP+'%';
+document.getElementById('kPct').textContent=kP+'%';
+setTimeout(function(){document.getElementById('vBar').style.width=vP+'%';document.getElementById('pBar').style.width=pP+'%';document.getElementById('kBar').style.width=kP+'%'},200);
+var d=dom(c.v,c.p,c.k);
+var s=sec(d,c.v,c.p,c.k);
+var sv=stateVal();
+var st=stateText();
+var late=ans.q14==='late';
+var waterD=ans.q15==='during';
+var hasThy=meds.indexOf('thyronorm')>-1;
+var hasMet=meds.indexOf('metformin')>-1;
+var hasBP=meds.indexOf('bp')>-1;
+var hasAnt=meds.indexOf('antacids')>-1;
+document.getElementById('doshaName').textContent=d+'-'+s;
+document.getElementById('rBadge').textContent=d+' Dominant — Gut Imbalance Identified';
+document.getElementById('rSubtitle').textContent='Based on their '+st+' food culture, '+(document.getElementById('q2').value||'50+')+ ' '+(ans.q3||'')+' body, current medications, and digestion patterns.';
+document.getElementById('gutInsight').innerHTML='<div class="insight-label">What This Means For Their Gut</div><p>'+gutText(d)+'</p>';
+var mn=[];
+if(hasThy)mn.push('Thyronorm must be taken on a completely empty stomach 45 minutes before any food or chai. Soy, millets, and high-fibre cereals block its absorption. Day 3 of your protocol reveals exactly which morning foods to avoid.');
+if(hasMet)mn.push('Metformin depletes Vitamin B12 over time and disrupts the gut microbiome — this is why long-term Metformin users develop new digestive complaints. The protocol includes specific foods that support B12 absorption without supplementation.');
+if(hasBP)mn.push('Common BP medications interact with high-potassium foods. Coconut water, bananas, and certain leafy greens need to be timed carefully. The protocol flags these on Day 2.');
+if(hasAnt)mn.push('Regular antacid use reduces stomach acid below healthy levels over time — paradoxically worsening digestion. The 5-day protocol is designed to naturally restore Agni so antacid dependence reduces measurably by Day 5.');
+var mb=document.getElementById('medBox');
+if(mn.length>0){mb.style.display='block';mb.innerHTML='<div class="med-label">Medication Cross-Reference</div><ul>'+mn.map(function(n){return'<li>'+n+'</li>'}).join('')+'</ul>'}
+var day1=day1Data(d,sv,late,waterD);
+document.getElementById('d1Sub').textContent=day1.sub;
+function tb(id,data){document.getElementById(id).innerHTML='<div class="time-label">'+data.t+'</div><h4>'+data.h+'</h4><p>'+data.d+'</p><div class="spice-tag">'+data.tag+'</div>'}
+tb('d1Morning',day1.morning);tb('d1Afternoon',day1.afternoon);tb('d1Evening',day1.evening);
+var lk=lockedData(d,hasThy,hasMet);
+document.getElementById('lockedDays').innerHTML=lk.map(function(x){return'<div class="locked-day"><div class="lock-icon">🔒</div><div class="locked-day-content"><div class="day-num">'+x.day+' — Locked</div><div class="day-teaser">'+x.t+'</div></div></div>'}).join('');
+window.scrollTo(0,0)
+}
+</script>
+</body>
+</html>
