@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>You're In — Sattva</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#FFFBF5;color:#1a1a1a;min-height:100vh}
+.topbar{background:#E8820C;color:#fff;text-align:center;padding:10px;font-size:13px;font-weight:500;letter-spacing:0.02em}
+.container{max-width:520px;margin:0 auto;padding:40px 20px 60px}
+
+.hero{text-align:center;padding:20px 0 32px}
+.tick-circle{width:72px;height:72px;background:#EAF3DE;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:32px}
+.hero h1{font-size:28px;font-weight:800;color:#1a1a1a;line-height:1.3;margin-bottom:12px}
+.hero h1 span{color:#E8820C}
+.hero p{font-size:15px;color:#666;line-height:1.75}
+
+.card{background:#fff;border:1px solid #F0E8DC;border-radius:16px;padding:22px;margin-bottom:14px}
+.card-label{font-size:11px;font-weight:700;color:#B85C00;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px}
+.card p{font-size:14px;color:#444;line-height:1.75}
+.card ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.card ul li{font-size:14px;color:#444;line-height:1.5;padding-left:28px;position:relative}
+.card ul li .num{position:absolute;left:0;width:20px;height:20px;background:#E8820C;color:#fff;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;top:1px}
+
+.countdown-card{background:#FEF3E2;border:1px solid #F5C07A;border-radius:16px;padding:22px;margin-bottom:14px;text-align:center}
+.countdown-card .c-label{font-size:11px;font-weight:700;color:#B85C00;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
+.countdown-card h2{font-size:22px;font-weight:800;color:#1a1a1a;margin-bottom:8px;line-height:1.3}
+.countdown-card p{font-size:13px;color:#888;line-height:1.6}
+
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:16px;position:relative;padding-bottom:20px}
+.tl-item:last-child{padding-bottom:0}
+.tl-left{display:flex;flex-direction:column;align-items:center;min-width:32px}
+.tl-dot{width:32px;height:32px;border-radius:50%;background:#E8820C;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tl-dot.locked{background:#F0E8DC;color:#B85C00}
+.tl-line{flex:1;width:2px;background:#F0E8DC;margin-top:4px}
+.tl-item:last-child .tl-line{display:none}
+.tl-content{padding-top:4px;padding-bottom:4px}
+.tl-content h4{font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:3px}
+.tl-content p{font-size:12px;color:#888;line-height:1.5}
+.tl-content .unlocked-tag{display:inline-block;background:#EAF3DE;color:#3B6D11;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin-bottom:4px}
+.tl-content .locked-tag{display:inline-block;background:#F0E8DC;color:#B85C00;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin-bottom:4px}
+
+.wa-box{background:#E6F4EA;border:1px solid #B8DDBF;border-radius:14px;padding:20px;text-align:center;margin-bottom:14px}
+.wa-box h3{font-size:16px;font-weight:700;color:#1E6B33;margin-bottom:8px}
+.wa-box p{font-size:13px;color:#4A9A5E;line-height:1.6;margin-bottom:14px}
+.wa-btn{display:inline-block;background:#25D366;color:#fff;font-size:15px;font-weight:700;padding:12px 28px;border-radius:10px;text-decoration:none}
+
+.quote-box{background:#1a1a1a;border-radius:16px;padding:24px;text-align:center;margin-bottom:14px}
+.quote-box p{font-size:16px;color:#fff;line-height:1.75;font-style:italic}
+.quote-box .attr{font-size:12px;color:#888;margin-top:10px}
+
+.footer{text-align:center;padding-top:20px}
+.footer .logo{font-size:22px;font-weight:800;color:#E8820C;margin-bottom:6px}
+.footer p{font-size:12px;color:#bbb;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="topbar">🌿 Sattva — Ayurvedic Gut Reset</div>
+<div class="container">
+
+<div class="hero">
+  <div class="tick-circle">✓</div>
+  <h1>You just did something <span>most children never do.</span></h1>
+  <p>You paid attention. You took action. Most people just forward a health article and forget. You actually did something for your parent's gut — and that matters.</p>
+</div>
+
+<div class="countdown-card">
+  <div class="c-label">What happens next</div>
+  <h2>Your parent's protocol arrives on WhatsApp within 24 hours.</h2>
+  <p>We are personalising their 5-day plan based on their Prakriti, medications, and home state. Good things take a little time — and this one is worth it.</p>
+</div>
+
+<div class="card">
+  <div class="card-label">Your 5-day journey — what to expect</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-dot">1</div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="unlocked-tag">Arriving on WhatsApp</div><h4>Day 1 — The Reset Begins</h4><p>Your parent gets their morning ritual, afternoon spice action, and one evening habit fix. Simple. Takes 5 minutes total.</p></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-dot">2</div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="unlocked-tag">Arriving Day 2</div><h4>Day 2 — The Hidden Trigger</h4><p>We reveal the one food your parent eats every day that is silently feeding their gut problem. Most families are genuinely surprised.</p></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-dot">3</div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="unlocked-tag">Arriving Day 3</div><h4>Day 3 — The First Real Change</h4><p>This is the day most people message us saying "something feels different." The protocol reaches its first peak effect on day 3.</p></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-dot locked">4</div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="locked-tag">Coming Day 4</div><h4>Day 4 — The Medication Insight</h4><p>If your parent is on Metformin, Thyronorm, or BP medication — Day 4 reveals exactly how these interact with their gut and what fixes it.</p></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-dot locked">5</div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="locked-tag">Coming Day 5</div><h4>Day 5 — The Full Reset</h4><p>The complete protocol comes together. By today your parent should be reaching for Digene significantly less — if at all.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-label">3 things to do right now</div>
+  <ul>
+    <li><div class="num">1</div>Save this WhatsApp number so your parent doesn't miss the message — we'll send it from an Indian number.</li>
+    <li><div class="num">2</div>Tell your parent to expect a WhatsApp message tomorrow morning with their personalised gut reset plan.</li>
+    <li><div class="num">3</div>Don't change their diet tonight — let them start fresh on Day 1 when the protocol arrives.</li>
+  </ul>
+</div>
+
+<div class="wa-box">
+  <h3>Questions? We're on WhatsApp.</h3>
+  <p>Message us anytime. A real person responds — not a bot. We're a small team that genuinely cares about getting this right for your parent.</p>
+  <a href="https://wa.me/918971127365" class="wa-btn">Chat with us on WhatsApp</a>
+</div>
+
+<div class="quote-box">
+  <p>"She raised you on haldi doodh, home remedies, and food made with love. Now it's your turn to give something back — using the same language she understands."</p>
+  <div class="attr">— The Sattva team</div>
+</div>
+
+<div class="footer">
+  <div class="logo">sattva</div>
+  <p>Built with love for Indian families.<br>
+  <em>Wellness program, not medical advice. Always consult your doctor.</em></p>
+</div>
+
+</div>
+</body>
+</html>
